@@ -1,0 +1,7 @@
+interface:
+  display_name: "Modern 95 UI for AI"
+  short_description: "Build consistent modern Win95-inspired application UIs"
+  default_prompt: "Use $modern-95-ui to build or refine this interface with the Modern 95 UI design system, preserving the project's behavior and approved visual baseline."
+
+policy:
+  allow_implicit_invocation: true

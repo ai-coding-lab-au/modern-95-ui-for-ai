@@ -1,0 +1,23 @@
+/* Modern 95 UI 0.1.0 — selected 2026-10-17.
+   Apply after component CSS. For an embedded theme, scope this and the adapted
+   component selectors to the same theme container. These are tokens, not a UI kit. */
+:root {
+  --desktop: #008080;
+  --title: #102776;
+  --chrome: #eef0ed;
+  --font: "Segoe UI", sans-serif;
+  --font-size: 14px;
+  --radius: 4px;
+  --control: 30px;
+  --cell-y: 9px;
+  --space: 16px;
+  --edge: #89979b;
+  --control-shadow: inset 1px 1px #fff, inset -1px -1px #9aa5a6, 0 1px 2px #1e303328;
+  --window-shadow: inset 1px 1px white, 0 8px 28px #003b3b40;
+  --ink: #222f33;
+  --muted: #58676c;
+  --line: #e1e7e4;
+  --paper: #fff;
+  --accent-soft: color-mix(in srgb, var(--title) 10%, white);
+  --accent-edge: color-mix(in srgb, var(--title) 32%, white);
+}

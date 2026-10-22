@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Service requests · Modern 95 UI</title>
+  <link rel="stylesheet" href="../m95.css">
+  <link rel="stylesheet" href="./request.css">
+  <script type="module" src="./request.mjs"></script>
+</head>
+<body class="m95 m95-desktop">
+  <div class="m95-shell">
+    <header class="m95-titlebar">
+      <p class="m95-title">Maintenance desk</p>
+      <span class="m95-context">Synthetic team workspace</span>
+    </header>
+    <div class="m95-workspace">
+      <aside class="m95-sidebar">
+        <nav class="m95-nav" aria-label="Examples">
+          <a class="m95-nav-item" href="../index.html">Starter gallery</a>
+          <a class="m95-nav-item" href="./assets.html">Asset register</a>
+          <a class="m95-nav-item" href="./request.html" aria-current="page">Service requests</a>
+        </nav>
+      </aside>
+      <main class="m95-main">
+        <div class="m95-page-heading">
+          <div><p class="m95-eyebrow">Team maintenance</p><h1 class="m95-page-title">Service requests</h1></div>
+          <button class="m95-button m95-button--primary" id="new-request" type="button">New request</button>
+        </div>
+        <div class="m95-content m95-stack">
+          <noscript><p>Enable JavaScript to create and review requests. This example runs entirely in your browser.</p></noscript>
+          <section class="m95-list-frame" id="storage-warning" aria-labelledby="storage-title" hidden>
+            <div class="m95-list-heading"><strong id="storage-title">Storage needs attention</strong></div>
+            <div class="m95-content m95-stack">
+              <p class="request-zero" id="storage-message" role="alert"></p>
+              <div class="m95-row">
+                <button class="m95-button" id="retry-storage" type="button">Retry storage</button>
+                <button class="m95-button" id="download-storage" type="button" hidden>Download unreadable data</button>
+              </div>
+            </div>
+          </section>
+          <p class="request-zero m95-muted">Saved requests stay in this browser profile on this local address. Use synthetic information only.</p>
+          <p class="request-zero" id="request-notice" role="status" aria-live="polite"></p>
+          <div class="m95-list-frame" id="saved-list" hidden>
+            <div class="m95-list-heading"><strong id="saved-heading">Saved requests</strong></div>
+            <div class="m95-table-scroll" tabindex="0" role="region" aria-labelledby="saved-heading">
+              <table class="m95-table request-table">
+                <thead><tr><th scope="col" class="m95-row-id">Request</th><th scope="col">Location</th><th scope="col">Preferred date</th><th scope="col">Priority</th><th scope="col">Details</th></tr></thead>
+                <tbody id="request-rows"></tbody>
+              </table>
+            </div>
+            <div class="m95-list-footer" id="request-count"></div>
+          </div>
+          <p class="m95-empty" id="empty-requests">No saved requests. Choose New request to begin.</p>
+        </div>
+      </main>
+    </div>
+    <footer class="m95-statusbar"><span id="storage-status">Checking local storage…</span><span>Three-step request form</span></footer>
+  </div>
+
+  <dialog class="m95-dialog" id="request-editor" aria-labelledby="editor-title" aria-describedby="step-progress">
+    <form class="m95-dialog-layout" id="request-form" novalidate>
+      <header class="m95-dialog-heading"><h2 class="m95-dialog-title" id="editor-title">New service request</h2></header>
+      <div class="m95-dialog-body m95-stack">
+        <div>
+          <p class="m95-eyebrow" id="step-progress">Step 1 of 3</p>
+          <ol class="request-steps" aria-label="Request progress">
+            <li aria-current="step"><span class="m95-badge" id="step-label-1">Request details — current</span></li>
+            <li><span class="m95-muted" id="step-label-2">Scheduling and priority</span></li>
+            <li><span class="m95-muted" id="step-label-3">Review and save</span></li>
+          </ol>
+        </div>
+        <p class="m95-error" id="form-error" role="alert"></p>
+        <div class="m95-row" id="form-storage-actions" hidden>
+          <button class="m95-button" id="form-retry-storage" type="button">Retry storage</button>
+          <button class="m95-button" id="form-download-storage" type="button" hidden>Download unreadable data</button>
+        </div>
+        <section class="m95-stack" id="step-1" aria-labelledby="step-heading-1">
+          <h3 class="m95-section-title request-zero" id="step-heading-1" tabindex="-1">Request details</h3>
+          <div class="m95-field">
+            <label for="request-title">Request title (required)</label>
+            <input class="m95-input" id="request-title" name="title" required maxlength="100" autofocus autocomplete="off" aria-describedby="title-help title-error">
+            <p class="m95-help" id="title-help">Name the item and the issue, up to 100 characters.</p>
+            <p class="m95-error" id="title-error"></p>
+          </div>
+          <div class="m95-field-row">
+            <div class="m95-field">
+              <label for="request-location">Location (required)</label>
+              <input class="m95-input" id="request-location" name="location" required maxlength="80" autocomplete="off" aria-describedby="location-error">
+              <p class="m95-error" id="location-error"></p>
+            </div>
+            <div class="m95-field">
+              <label for="request-requester">Requested by (required)</label>
+              <input class="m95-input" id="request-requester" name="requester" required maxlength="80" autocomplete="off" aria-describedby="requester-error">
+              <p class="m95-error" id="requester-error"></p>
+            </div>
+          </div>
+          <div class="m95-field">
+            <label for="request-description">What needs attention? (required)</label>
+            <textarea class="m95-input" id="request-description" name="description" rows="4" required minlength="10" maxlength="2000" aria-describedby="description-help description-error"></textarea>
+            <p class="m95-help" id="description-help">Describe the fault and its impact in 10–2,000 characters.</p>
+            <p class="m95-error" id="description-error"></p>
+          </div>
+        </section>
+        <section class="m95-stack" id="step-2" aria-labelledby="step-heading-2" hidden>
+          <h3 class="m95-section-title request-zero" id="step-heading-2" tabindex="-1">Scheduling and priority</h3>
+          <fieldset class="request-fieldset m95-stack">
+            <legend class="m95-label">Priority (required)</legend>
+            <label class="m95-choice" for="priority-routine"><input class="m95-check" id="priority-routine" name="priority" value="routine" type="radio" required checked aria-describedby="priority-error"><span><strong>Routine</strong> — plan during normal maintenance.</span></label>
+            <label class="m95-choice" for="priority-priority"><input class="m95-check" id="priority-priority" name="priority" value="priority" type="radio" required aria-describedby="priority-error"><span><strong>Priority</strong> — an issue is disrupting team work.</span></label>
+            <p class="m95-error" id="priority-error"></p>
+          </fieldset>
+          <div class="m95-field-row">
+            <div class="m95-field">
+              <label for="request-date">Preferred date (required)</label>
+              <input class="m95-input" id="request-date" name="date" type="date" required aria-describedby="date-help date-error">
+              <p class="m95-help" id="date-help">Choose today or a later date.</p>
+              <p class="m95-error" id="date-error"></p>
+            </div>
+            <div class="m95-field">
+              <label for="request-window">Time window (required)</label>
+              <select class="m95-input" id="request-window" name="window" required aria-describedby="window-error">
+                <option value="">Choose a window</option>
+                <option value="any">Any time, 09:00–17:00</option>
+                <option value="morning">Morning, 09:00–12:00</option>
+                <option value="afternoon">Afternoon, 13:00–17:00</option>
+              </select>
+              <p class="m95-error" id="window-error"></p>
+            </div>
+          </div>
+          <div class="m95-field">
+            <label for="request-access">Access instructions (optional)</label>
+            <textarea class="m95-input" id="request-access" name="access" rows="3" maxlength="1000" aria-describedby="access-help access-error"></textarea>
+            <p class="m95-help" id="access-help">Include an onsite contact or access arrangements, up to 1,000 characters.</p>
+            <p class="m95-error" id="access-error"></p>
+          </div>
+          <p class="m95-help">This records a preferred visit time; it does not book a technician.</p>
+        </section>
+        <section class="m95-stack" id="step-3" aria-labelledby="step-heading-3" hidden>
+          <h3 class="m95-section-title request-zero" id="step-heading-3" tabindex="-1">Review and save</h3>
+          <dl class="request-summary" id="review-summary"></dl>
+          <p class="m95-help">Save adds this request to the local list. No message is sent to anyone.</p>
+        </section>
+      </div>
+      <footer class="m95-dialog-actions">
+        <button class="m95-button" id="cancel-request" type="button">Cancel</button>
+        <span class="request-action-spacer" aria-hidden="true"></span>
+        <button class="m95-button" id="back-step" type="button" hidden>Back</button>
+        <button class="m95-button m95-button--primary" id="advance-step" type="submit">Next: scheduling</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="m95-dialog" id="discard-dialog" aria-labelledby="discard-title" aria-describedby="discard-description">
+    <div class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 class="m95-dialog-title" id="discard-title">Discard this draft?</h2></header>
+      <div class="m95-dialog-body"><p class="request-zero" id="discard-description">Your unsaved entries will be removed. Previously saved requests stay unchanged.</p></div>
+      <footer class="m95-dialog-actions">
+        <button class="m95-button" id="keep-draft" type="button" autofocus>Keep editing</button>
+        <button class="m95-button m95-button--danger" id="discard-draft" type="button">Discard draft</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <dialog class="m95-dialog" id="request-details" aria-labelledby="detail-title">
+    <div class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 class="m95-dialog-title" id="detail-title" tabindex="-1">Saved request</h2></header>
+      <div class="m95-dialog-body m95-stack"><p class="m95-help" id="detail-saved"></p><dl class="request-summary" id="detail-summary"></dl></div>
+      <footer class="m95-dialog-actions"><button class="m95-button" id="close-details" type="button">Close</button></footer>
+    </div>
+  </dialog>
+</body>
+</html>

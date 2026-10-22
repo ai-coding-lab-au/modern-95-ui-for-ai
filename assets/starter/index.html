@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern 95 UI · Starter</title>
+  <link rel="stylesheet" href="./m95.css">
+  <script type="module" src="./gallery.mjs"></script>
+</head>
+<body class="m95 m95-desktop">
+  <div class="m95-shell">
+    <header class="m95-titlebar">
+      <p class="m95-title">Modern 95 UI</p>
+      <span class="m95-context">Starter · Component gallery</span>
+    </header>
+    <div class="m95-workspace">
+      <aside class="m95-sidebar">
+        <nav class="m95-nav" aria-label="Main">
+          <a class="m95-nav-item" href="./index.html" aria-current="page">Components</a>
+          <a class="m95-nav-item" href="./examples/assets.html">Asset register</a>
+          <a class="m95-nav-item" href="./examples/request.html">Service request</a>
+        </nav>
+      </aside>
+      <main class="m95-main">
+        <div class="m95-page-heading">
+          <div><p class="m95-eyebrow">Reference workspace</p><h1 class="m95-page-title">A consistent starting point</h1></div>
+          <button id="edit-sample" class="m95-button m95-button--primary" type="button">Edit sample</button>
+        </div>
+        <div class="m95-toolbar">
+          <div class="m95-filter-group" role="group" aria-label="Sample status">
+            <button class="m95-button" data-filter="all" aria-pressed="true" type="button">All samples</button>
+            <button class="m95-button" data-filter="Ready" aria-pressed="false" type="button">Ready</button>
+            <button class="m95-button" data-filter="Draft" aria-pressed="false" type="button">Draft</button>
+          </div>
+          <span class="m95-toolbar-spacer"></span>
+          <button id="pin-sample" class="m95-button m95-button--quiet" aria-pressed="false" type="button">Pin sample</button>
+        </div>
+        <div class="m95-content m95-stack">
+          <section aria-labelledby="cards-heading">
+            <h2 id="cards-heading" class="m95-section-title">Cards and actions</h2>
+            <div class="m95-card-grid">
+              <article class="m95-card" data-sample-status="Ready">
+                <div class="m95-card-body">
+                  <span class="m95-badge" data-tone="positive">Ready</span>
+                  <h3 id="sample-title" class="m95-card-title">Release checklist</h3>
+                  <p id="sample-description">Check the final content, keyboard flow and saved records.</p>
+                  <p id="pin-status" class="m95-help">Not pinned</p>
+                </div>
+                <footer class="m95-card-actions"><button id="edit-card" class="m95-button" type="button">Edit card</button><a class="m95-link" href="#checklist-heading">View checklist</a></footer>
+              </article>
+              <article class="m95-card" data-sample-status="Draft">
+                <div class="m95-card-body">
+                  <span class="m95-badge" data-tone="neutral">Draft</span>
+                  <h3 class="m95-card-title">Offline handover kit for a longer project name</h3>
+                  <p>Keep full titles readable while aligning the shared action row.</p>
+                </div>
+                <footer class="m95-card-actions"><a class="m95-button" href="./examples/request.html">Open request example</a></footer>
+              </article>
+            </div>
+          </section>
+          <section aria-labelledby="controls-heading" class="m95-stack">
+            <h2 id="controls-heading" class="m95-section-title">Real control states</h2>
+            <div class="m95-row">
+              <button id="press-sample" class="m95-button" type="button">Press and release</button>
+              <button class="m95-button" type="button" disabled>Unavailable action</button>
+              <output id="press-count" class="m95-muted" aria-live="polite">Activated 0 times</output>
+            </div>
+            <p class="m95-help">Hover or hold a button to inspect its feedback. Use Tab to see the keyboard focus outline.</p>
+            <form id="field-form" class="m95-stack" novalidate>
+              <div class="m95-field-row">
+                <div class="m95-field">
+                  <label for="reference">Reference</label>
+                  <input id="reference" class="m95-input" required aria-describedby="reference-error" placeholder="Enter a reference">
+                  <p id="reference-error" class="m95-error" aria-live="polite"></p>
+                </div>
+                <div class="m95-field">
+                  <label for="amount">Amount</label>
+                  <input id="amount" class="m95-input" inputmode="decimal" value="100" aria-describedby="amount-help">
+                  <p id="amount-help" class="m95-help">Editing text stays as entered.</p>
+                </div>
+                <div class="m95-field">
+                  <label for="date">Review date</label>
+                  <input id="date" class="m95-input" type="date" value="2026-10-22">
+                </div>
+                <div class="m95-field">
+                  <label for="delivery">Delivery method</label>
+                  <select id="delivery" class="m95-input" disabled><option>Local preview only</option></select>
+                </div>
+              </div>
+              <div class="m95-row"><button class="m95-button" type="submit">Validate reference</button><span id="validation-status" class="m95-help" role="status"></span></div>
+            </form>
+          </section>
+          <section aria-labelledby="table-heading">
+            <h2 id="table-heading" class="m95-section-title">A single table frame</h2>
+            <div class="m95-list-frame">
+              <div class="m95-list-heading">Sample assets</div>
+              <div class="m95-table-scroll" role="region" aria-label="Sample asset table" tabindex="0">
+                <table class="m95-table">
+                  <thead><tr><th scope="col" class="m95-row-id">Asset</th><th scope="col">State</th><th scope="col" class="m95-number">Value</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row" class="m95-row-id">Desk lamp</th><td><span class="m95-badge" data-tone="positive">Available</span></td><td class="m95-number">$125.50</td></tr>
+                    <tr><th scope="row" class="m95-row-id">Workshop display</th><td><span class="m95-badge" data-tone="warning">In review</span></td><td class="m95-number">$1,250.00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="m95-list-footer">2 synthetic assets · AUD</div>
+            </div>
+          </section>
+          <section aria-labelledby="checklist-heading">
+            <h2 id="checklist-heading" class="m95-section-title">Continuous list edges</h2>
+            <div class="m95-group-list">
+              <details class="m95-group"><summary>Content and layout</summary><div class="m95-group-content">Check long names, the last table column and the final action in a narrow window.</div></details>
+              <details class="m95-group"><summary>Keyboard and persistence</summary><div class="m95-group-content">Open the sample editor, change its title, then press Escape. Keep editing or explicitly discard the draft.</div></details>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <footer class="m95-statusbar"><span id="gallery-status" role="status">Session examples · reset on reload</span><span>No remote services</span></footer>
+  </div>
+
+  <dialog id="sample-editor" class="m95-dialog" aria-labelledby="editor-title">
+    <form id="editor-form" class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 id="editor-title" class="m95-dialog-title">Edit sample card</h2></header>
+      <div class="m95-dialog-body m95-stack">
+        <div class="m95-field"><label for="card-title">Title</label><input id="card-title" class="m95-input" required maxlength="160" autofocus></div>
+        <div class="m95-field"><label for="card-description">Description</label><textarea id="card-description" class="m95-input" rows="6" maxlength="2000"></textarea></div>
+        <p class="m95-help">Changes update this gallery session.</p>
+      </div>
+      <footer class="m95-dialog-actions"><button id="cancel-editor" class="m95-button" type="button">Cancel</button><button class="m95-button m95-button--primary" type="submit">Save sample</button></footer>
+    </form>
+  </dialog>
+  <dialog id="discard-dialog" class="m95-dialog" aria-labelledby="discard-title" aria-describedby="discard-message">
+    <div class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 id="discard-title" class="m95-dialog-title">Discard changes?</h2></header>
+      <div class="m95-dialog-body"><p id="discard-message">Your latest edits have not been saved to the sample card.</p></div>
+      <footer class="m95-dialog-actions"><button id="keep-editing" class="m95-button" type="button" autofocus>Keep editing</button><button id="discard-changes" class="m95-button m95-button--danger" type="button">Discard changes</button></footer>
+    </div>
+  </dialog>
+</body>
+</html>

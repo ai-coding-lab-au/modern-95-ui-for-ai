@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Equipment register · Modern 95 UI</title>
+  <link rel="stylesheet" href="../m95.css">
+  <link rel="stylesheet" href="./assets.css">
+  <script type="module" src="./assets.mjs"></script>
+</head>
+<body class="m95 m95-desktop assets-app">
+  <div class="m95-shell">
+    <header class="m95-titlebar">
+      <p class="m95-title">Team equipment</p>
+      <span class="m95-context">Local equipment register</span>
+    </header>
+    <div class="m95-workspace">
+      <aside class="m95-sidebar">
+        <nav class="m95-nav" aria-label="Examples">
+          <a class="m95-nav-item" href="../index.html">Starter gallery</a>
+          <a class="m95-nav-item" href="./assets.html" aria-current="page">Equipment register</a>
+          <a class="m95-nav-item" href="./request.html">Request workflow</a>
+        </nav>
+      </aside>
+      <main class="m95-main">
+        <div class="m95-page-heading">
+          <h1 class="m95-page-title">Equipment register</h1>
+          <button type="button" id="add-device" class="m95-button m95-button--primary">Add device</button>
+        </div>
+        <div id="storage-notice" class="m95-content assets-storage-notice" hidden>
+          <p id="storage-message" class="m95-error" role="alert"></p>
+          <button type="button" id="reload-register" class="m95-button">Reload saved register</button>
+        </div>
+        <div class="m95-toolbar assets-toolbar" aria-label="Equipment filters">
+          <div class="m95-field assets-search-field">
+            <label for="search">Search equipment</label>
+            <input id="search" class="m95-input" type="search" placeholder="ID, name, person or location" autocomplete="off">
+          </div>
+          <div class="m95-field assets-status-field">
+            <label for="status-filter">Status</label>
+            <select id="status-filter" class="m95-input">
+              <option value="">All statuses</option>
+              <option>Available</option>
+              <option>In use</option>
+              <option>Under repair</option>
+              <option>Retired</option>
+            </select>
+          </div>
+          <button type="button" id="clear-filters" class="m95-button" disabled>Clear filters</button>
+        </div>
+        <div class="m95-content">
+          <div class="m95-list-frame">
+            <div class="m95-list-heading"><span id="result-count" role="status" aria-live="polite"></span></div>
+            <div id="equipment-scroll" class="m95-table-scroll" tabindex="0" role="region" aria-label="Equipment register, scroll horizontally for all columns">
+              <table class="m95-table assets-table">
+                <caption class="m95-sr-only">Equipment records with detail and edit actions</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" class="m95-row-id">Asset ID</th>
+                    <th scope="col">Equipment</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Assigned to</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Details</th>
+                  </tr>
+                </thead>
+                <tbody id="equipment-rows"></tbody>
+              </table>
+            </div>
+            <p id="empty-results" class="m95-empty" hidden>No matching equipment. Change the search or clear the filters.</p>
+            <div class="m95-list-footer" id="register-source">Synthetic starting records · Saved in this browser after your first save.</div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer class="m95-statusbar">
+      <span id="action-status" role="status" aria-live="polite">Ready</span>
+      <span>This browser only · No account or server sync</span>
+    </footer>
+  </div>
+
+  <dialog id="detail-dialog" class="m95-dialog" aria-labelledby="detail-title">
+    <div class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 id="detail-title" class="m95-dialog-title" tabindex="-1">Device details</h2></header>
+      <div class="m95-dialog-body">
+        <dl id="detail-values" class="assets-details"></dl>
+      </div>
+      <footer class="m95-dialog-actions">
+        <button type="button" id="close-detail" class="m95-button">Close</button>
+        <button type="button" id="edit-device" class="m95-button m95-button--primary">Edit device</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <dialog id="editor-dialog" class="m95-dialog" aria-labelledby="editor-title" aria-describedby="editor-requirements">
+    <form id="device-form" class="m95-dialog-layout" novalidate>
+      <header class="m95-dialog-heading"><h2 id="editor-title" class="m95-dialog-title">Add device</h2></header>
+      <div class="m95-dialog-body m95-stack">
+        <p id="editor-requirements" class="m95-help">Asset ID, equipment name and location are required. In-use equipment also needs an assignee.</p>
+        <div class="m95-field-row">
+          <div class="m95-field">
+            <label for="asset-tag">Asset ID</label>
+            <input id="asset-tag" name="tag" class="m95-input" required maxlength="16" autocomplete="off" aria-describedby="tag-help tag-error" autofocus>
+            <p id="tag-help" class="m95-help">1–16 letters, numbers or hyphens; unique per device.</p>
+            <p id="tag-error" class="m95-error"></p>
+          </div>
+          <div class="m95-field">
+            <label for="asset-category">Category</label>
+            <select id="asset-category" name="category" class="m95-input" aria-describedby="category-error">
+              <option>Laptop</option><option>Desktop</option><option>Monitor</option><option>Peripheral</option><option>Networking</option>
+            </select>
+            <p id="category-error" class="m95-error"></p>
+          </div>
+        </div>
+        <div class="m95-field">
+          <label for="asset-name">Equipment name</label>
+          <input id="asset-name" name="name" class="m95-input" required maxlength="160" autocomplete="off" aria-describedby="name-error">
+          <p id="name-error" class="m95-error"></p>
+        </div>
+        <div class="m95-field-row">
+          <div class="m95-field">
+            <label for="asset-status">Status</label>
+            <select id="asset-status" name="status" class="m95-input" aria-describedby="status-error">
+              <option>Available</option><option>In use</option><option>Under repair</option><option>Retired</option>
+            </select>
+            <p id="status-error" class="m95-error"></p>
+          </div>
+          <div class="m95-field">
+            <label for="asset-assignee">Assigned to</label>
+            <input id="asset-assignee" name="assignedTo" class="m95-input" maxlength="80" autocomplete="off" aria-describedby="assignedTo-error">
+            <p id="assignedTo-error" class="m95-error"></p>
+          </div>
+        </div>
+        <div class="m95-field-row">
+          <div class="m95-field">
+            <label for="asset-location">Location</label>
+            <input id="asset-location" name="location" class="m95-input" required maxlength="80" autocomplete="off" aria-describedby="location-error">
+            <p id="location-error" class="m95-error"></p>
+          </div>
+          <div class="m95-field">
+            <label for="asset-serial">Serial number <span class="m95-muted">(optional)</span></label>
+            <input id="asset-serial" name="serialNumber" class="m95-input" maxlength="100" autocomplete="off" aria-describedby="serialNumber-error">
+            <p id="serialNumber-error" class="m95-error"></p>
+          </div>
+        </div>
+        <div class="m95-field">
+          <label for="asset-notes">Notes <span class="m95-muted">(optional)</span></label>
+          <textarea id="asset-notes" name="notes" class="m95-input" rows="4" maxlength="2000" aria-describedby="notes-error"></textarea>
+          <p id="notes-error" class="m95-error"></p>
+        </div>
+        <p id="save-error" class="m95-error" role="alert"></p>
+      </div>
+      <footer class="m95-dialog-actions">
+        <button type="button" id="cancel-editor" class="m95-button">Cancel</button>
+        <button type="submit" id="save-device" class="m95-button m95-button--primary">Save device</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="discard-dialog" class="m95-dialog" aria-labelledby="discard-title" aria-describedby="discard-message">
+    <div class="m95-dialog-layout">
+      <header class="m95-dialog-heading"><h2 id="discard-title" class="m95-dialog-title">Discard unsaved changes?</h2></header>
+      <div class="m95-dialog-body"><p id="discard-message">Your changes to this device have not been saved.</p></div>
+      <footer class="m95-dialog-actions">
+        <button type="button" id="keep-editing" class="m95-button" autofocus>Keep editing</button>
+        <button type="button" id="discard-changes" class="m95-button m95-button--danger">Discard changes</button>
+      </footer>
+    </div>
+  </dialog>
+  <noscript><p class="m95-content">Enable JavaScript to view and edit this local register.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,20 @@
+/* Example-specific layout only. Controls and theme belong to ../m95.css. */
+.request-zero { margin: 0; }
+.request-steps { display: grid; gap: 8px; margin: 8px 0 0; padding-left: 24px; }
+.request-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.request-fieldset > legend { margin-bottom: 8px; padding: 0; }
+.request-action-spacer { flex: 1 1 8px; }
+.request-summary { display: grid; grid-template-columns: minmax(100px, 0.4fr) minmax(0, 1fr); gap: 10px 16px; margin: 0; }
+.request-summary > dt, .request-summary > dd { margin: 0; overflow-wrap: anywhere; }
+.request-summary > dd { white-space: pre-wrap; }
+.request-table { min-width: 650px; table-layout: fixed; }
+.request-table th:first-child { width: 25%; }
+.request-table th:nth-child(2) { width: 25%; }
+.request-table th:nth-child(3) { width: 20%; }
+.request-table th:nth-child(4) { width: 14%; }
+.request-table th:last-child { width: 16%; }
+.request-table td, .request-table tbody th { overflow-wrap: anywhere; }
+@media (max-width: 400px) {
+  .request-summary { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .request-summary > dd { margin-bottom: 8px; }
+}

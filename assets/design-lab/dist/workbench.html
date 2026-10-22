@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/svg+xml" href="vendor/lucide/icons/clipboard-check.svg">
+  <link rel="stylesheet" href="workbench.css">
+  <title>Project handover · Modern 95 UI</title>
+</head>
+<body>
+<main class="m95-study">
+  <nav class="study-navigation" aria-label="Design references">
+    <a class="study-brand" href="workbench.html">Modern 95 UI <span>/ Preferred workbench</span></a>
+    <a href="../../starter/index.html">Content workbench starter <span aria-hidden="true">↗</span></a>
+  </nav>
+  <p class="study-note" id="preview-help">Interactive browser study · Window controls change this preview only. Synthetic data resets on reload.</p>
+
+  <section class="m95-window" aria-labelledby="window-name" aria-describedby="preview-help">
+    <header class="m95-titlebar">
+      <svg class="application-icon" data-workbench-icon="application" aria-hidden="true"></svg>
+      <span id="window-name">Handover desk</span>
+      <span class="window-context">Northwind Studio / Project delivery</span>
+      <div class="window-controls" role="group" aria-label="Preview window controls">
+        <button type="button" class="caption-button" id="minimize-preview" aria-label="Minimize preview" title="Minimize preview" aria-expanded="true"><svg data-workbench-icon="minimize" aria-hidden="true"></svg></button>
+        <button type="button" class="caption-button" id="expand-preview" aria-label="Expand preview" title="Expand preview" aria-pressed="false"><svg data-workbench-icon="expand" aria-hidden="true"></svg></button>
+        <button type="button" class="caption-button close-button" id="close-preview" aria-label="Close preview" title="Close preview"><svg data-workbench-icon="close" aria-hidden="true"></svg></button>
+      </div>
+    </header>
+
+    <div id="window-content">
+      <div class="page-heading">
+        <div><p class="eyebrow">Delivery workspace</p><h1>Project handover</h1></div>
+        <div class="heading-tools"><span class="tag">Local study</span><button type="button" class="button" id="reset-progress">Reset progress</button></div>
+      </div>
+      <div class="work-area">
+        <aside class="setup-panel" aria-labelledby="setup-heading">
+          <form id="setup-form" novalidate>
+            <div class="setup-fields">
+              <h2 id="setup-heading">Set up the handover</h2>
+              <p class="muted intro">Keep the files, decisions and access details together.</p>
+              <label for="project-name">Project name <span class="required">*</span></label>
+              <input id="project-name" name="project" value="Studio website refresh" maxlength="100" required aria-describedby="project-error">
+              <p id="project-error" class="field-error" role="alert" hidden></p>
+              <label for="project-owner">Prepared by</label>
+              <input id="project-owner" name="owner" value="Alex Morgan" maxlength="80" aria-describedby="owner-error">
+              <p id="owner-error" class="field-error" role="alert" hidden></p>
+              <label for="handover-date">Handover date</label>
+              <input id="handover-date" name="date" type="date" value="2026-10-23" aria-describedby="date-error">
+              <p id="date-error" class="field-error" role="alert" hidden></p>
+              <label for="handover-notes">Handover notes</label>
+              <textarea id="handover-notes" name="notes" rows="4" maxlength="500" aria-describedby="notes-error">Final review with the client before access is transferred.</textarea>
+              <p id="notes-error" class="field-error" role="alert" hidden></p>
+              <div class="field-hint"><span class="hint-mark" aria-hidden="true">i</span><p>Changes stay in this page. Export a checklist to keep a copy.</p></div>
+            </div>
+            <div class="setup-actions"><button type="submit" class="button primary">Apply details</button><p class="muted">Document selections are kept when you apply.</p></div>
+          </form>
+        </aside>
+
+        <section class="checklist-panel" aria-labelledby="checklist-heading">
+          <header class="panel-heading"><h2 id="checklist-heading">Handover checklist</h2><span id="progress-count" class="tag" role="status"></span></header>
+          <div class="checklist-content">
+            <div class="project-summary"><p class="eyebrow">Northwind Studio</p><h3 id="project-title"></h3><p class="muted" id="project-meta"></p><p id="project-note" class="project-note"></p></div>
+            <div class="list-intro"><span>Mark each document when it is ready.</span><span>8 documents · 3 groups</span></div>
+            <div class="document-groups" id="document-groups"></div>
+          </div>
+          <footer class="checklist-actions"><p class="muted">Exports include the current details and readiness.</p><button type="button" class="button primary" id="export-checklist">Export checklist <span aria-hidden="true">↓</span></button></footer>
+        </section>
+      </div>
+      <footer class="statusbar"><span id="feedback" role="status">Ready · Changes stay in this session</span><span>Modern 95 UI / Preferred visual</span></footer>
+    </div>
+  </section>
+  <section class="closed-preview" id="closed-preview" hidden aria-labelledby="closed-heading"><h2 id="closed-heading">Preview closed</h2><p>Your changes are still in this page.</p><button type="button" class="button" id="reopen-preview">Reopen preview</button></section>
+  <p class="study-footer">Navy chrome. Quiet surfaces. Room for the work.</p>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <form method="dialog"><header class="dialog-heading"><h2 id="reset-title">Reset checklist progress?</h2></header><div class="dialog-content"><p id="reset-description">All eight documents will be marked as not ready. Project details will be kept.</p></div><footer class="dialog-actions"><button class="button" value="cancel" autofocus>Cancel</button><button class="button primary" value="reset">Reset progress</button></footer></form>
+  </dialog>
+  <noscript><p>This interactive study needs JavaScript. Its files are local and have no external dependencies.</p></noscript>
+</main>
+<script type="module" src="workbench.mjs"></script>
+</body>
+</html>

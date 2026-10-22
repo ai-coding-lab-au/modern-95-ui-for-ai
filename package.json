@@ -1,0 +1,22 @@
+{
+  "name": "modern-95-ui-for-ai",
+  "version": "0.3.0-rc.1",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai.git"
+  },
+  "homepage": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai#readme",
+  "bugs": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues",
+  "description": "An AI-readable design skill, scoped UI starter and task workbench for modern Win95-inspired applications.",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node assets/starter/serve.mjs --open",
+    "start:starter": "node assets/starter/serve.mjs --open",
+    "start:workbench": "node scripts/serve-workbench.mjs --open",
+    "test": "node --test scripts/*.test.mjs",
+    "build:icons": "node scripts/build-icons.mjs"
+  }
+}
