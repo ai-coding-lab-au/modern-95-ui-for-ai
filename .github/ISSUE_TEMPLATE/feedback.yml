@@ -1,0 +1,73 @@
+name: UI feedback
+description: Report a reproducible issue or a focused lesson from using Modern 95 UI.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use synthetic examples. Remove customer data, names, emails, tokens, private links, local usernames and absolute paths from text, screenshots and files before posting. This issue is public.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Feedback type
+      options:
+        - Functional issue
+        - Visual or alignment issue
+        - Accessibility or keyboard issue
+        - Integration lesson
+        - Design preference
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Include the skill version and, when available, the commit SHA.
+      placeholder: 0.3.0-rc.1
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Page or component
+      placeholder: Equipment list, request wizard, Handover desk, or a named host component
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include browser and OS, framework if applicable, viewport size, zoom and known display scaling. Mark unknown values as unknown.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Provide the smallest example and steps needed to see the issue. For a preference, describe the comparison instead.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: State what should happen and which existing behavior or layout must remain unchanged.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Shareable evidence
+      description: Optional synthetic screenshot or minimal example. Say whether the observation is from a browser, native app, source review or automated test, and identify relevant checks you did not run.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Sharing check
+      options:
+        - label: I have permission to share this material and have removed private information.
+          required: true

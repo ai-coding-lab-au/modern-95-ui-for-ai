@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai.git"
   },
-  "homepage": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai#readme",
+  "homepage": "https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/",
   "bugs": "https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues",
   "description": "An AI-readable design skill, scoped UI starter and task workbench for modern Win95-inspired applications.",
   "type": "module",
@@ -17,6 +17,7 @@
     "start:starter": "node assets/starter/serve.mjs --open",
     "start:workbench": "node scripts/serve-workbench.mjs --open",
     "test": "node --test scripts/*.test.mjs",
-    "build:icons": "node scripts/build-icons.mjs"
+    "build:icons": "node scripts/build-icons.mjs",
+    "build:pages": "node scripts/build-pages.mjs"
   }
 }

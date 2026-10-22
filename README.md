@@ -4,6 +4,8 @@ A design skill and small UI starter for AI-assisted application development. Tea
 
 [中文说明](README.zh-CN.md) · [Design rules](references/design-system.md) · [Starter API](assets/starter/USAGE.md) · [License](LICENSE)
 
+[Live gallery](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/) · [Handover demo](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/design-lab/dist/workbench.html) · [Download preview](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/releases) · [Report an issue](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues/new/choose)
+
 **Public preview: 0.3.0-rc.1.** Repository: [modern-95-ui-for-ai](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai). Skill invocation stays **`$modern-95-ui`**.
 
 ![Scoped Starter gallery](docs/images/starter-gallery.png)
@@ -17,6 +19,12 @@ A design skill and small UI starter for AI-assisted application development. Tea
 - Original numerical tokens, MIT license, pinned Lucide sources and complete third-party notices.
 
 This is a design skill with reference implementations, not a React component package or production backend. Use existing application components and keep business logic in the host. Fonts are developer-controlled; the provided default is Segoe UI with a sans-serif fallback. No fonts, React95, Microsoft assets or remote runtime services are bundled.
+
+## Try in your browser
+
+Open the [gallery](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/), [equipment list](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/starter/examples/assets.html), [request wizard](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/starter/examples/request.html) or [Handover desk](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/design-lab/dist/workbench.html). These are the repository's existing examples, published without visual changes.
+
+Use synthetic data only. Equipment and request records stay in browser local storage; the demo has no application backend or analytics. GitHub Pages hosts the static files. For project work, run or copy the examples locally.
 
 ## Try locally
 
@@ -59,7 +67,7 @@ For another AI tool, follow that tool's skill-loading convention and point it to
 
 ## Reuse in an application
 
-Start with [USAGE](assets/starter/USAGE.md). Copy `m95.css` and optionally `m95.mjs`; wrap the UI in `.m95`. Add `.m95-desktop` only when a teal desktop backdrop is appropriate. Existing fonts can override `--m95-font`.
+Start with [USAGE](assets/starter/USAGE.md). Copy `m95.css` and optionally `m95.mjs`, together with [assets/starter/LICENSE](assets/starter/LICENSE), retaining its copyright notice and complete MIT license text in your project and redistributions. Wrap the UI in `.m95`. Add `.m95-desktop` only when a teal desktop backdrop is appropriate. Existing fonts can override `--m95-font`.
 
 ![Equipment example](docs/images/starter-assets.png)
 
@@ -72,5 +80,7 @@ npm test
 ```
 
 See [validation](docs/validation.md) for browser commands and evidence limits, [contribution rules](CONTRIBUTING.md) for lessons from other projects, and [source and license scope](docs/source-and-license.md) for this curated distribution. Historical experiments and private project evidence are outside this snapshot.
+
+GitHub Actions checks pushes and pull requests on Node.js 22 and 24. Passing updates to `main` automatically publish the existing examples to Pages. Shared design changes and releases remain maintainer-reviewed. The [feedback form](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues/new/choose) accepts bugs and reusable lessons; remove private data before attaching examples.
 
 Project code and documentation: **MIT**. Bundled Lucide geometry retains its upstream ISC and applicable Feather MIT notices. No affiliation with Microsoft is claimed.

@@ -1,6 +1,6 @@
 # Modern 95 UI Starter
 
-A small, framework-neutral implementation of the existing Modern 95 UI language. Copy `m95.css` and optionally `m95.mjs` into your project. There is no package installation, font download or runtime dependency. Use the gallery through the local server; ES modules need HTTP.
+A small, framework-neutral implementation of the existing Modern 95 UI language. Copy `m95.css` and optionally `m95.mjs` into your project, together with the adjacent [LICENSE](LICENSE). Retain its copyright notice and complete MIT license text in your project and redistributions. There is no package installation, font download or runtime dependency. Use the gallery through the local server; ES modules need HTTP.
 
 ## Minimal complete page
 

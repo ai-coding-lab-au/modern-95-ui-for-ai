@@ -4,6 +4,8 @@
 
 [English](README.md) · [设计规范](references/design-system.md) · [Starter 接入](assets/starter/USAGE.md) · [许可证](LICENSE)
 
+[在线展示](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/) · [Handover 工作台](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/design-lab/dist/workbench.html) · [下载预览版](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/releases) · [反馈问题](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues/new/choose)
+
 **当前公开预览版：`0.3.0-rc.1`。** GitHub 仓库：[modern-95-ui-for-ai](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai)；技能调用名保持 **`$modern-95-ui`**。
 
 ![Starter 状态展示](docs/images/starter-gallery.png)
@@ -17,6 +19,12 @@
 - 数值令牌、MIT 许可、固定版本 Lucide 图标及完整第三方声明。
 
 这是带参考实现的设计 skill。接入时沿用项目框架与业务逻辑。字体默认 Segoe UI，开发者可覆盖；包内不带字体、React95、微软素材或远程运行服务。
+
+## 在线试用
+
+直接打开 [组件展示](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/)、[设备清单](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/starter/examples/assets.html)、[申请向导](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/starter/examples/request.html) 或 [Handover 工作台](https://ai-coding-lab-au.github.io/modern-95-ui-for-ai/assets/design-lab/dist/workbench.html)。线上沿用仓库现有案例，不改变视觉。
+
+演示仅使用合成数据。设备和申请记录保存在浏览器本地存储；演示没有业务后端或分析追踪，由 GitHub Pages 托管静态文件。实际项目请在本机运行或复制接入。
 
 ## 本机试用
 
@@ -57,8 +65,10 @@ Windows 用户目录对应 `%USERPROFILE%\.agents\skills\modern-95-ui`。复制�
 
 ## 接入与反馈
 
-从 [USAGE](assets/starter/USAGE.md) 选择需要的结构与控件。Starter 使用 `.m95` 限定作用域；青绿桌面需显式添加 `.m95-desktop`。开发者可用 `--m95-font` 覆盖字体。输入 `100` 时保持编辑原文，金额显示和计算由业务层负责。
+从 [USAGE](assets/starter/USAGE.md) 选择需要的结构与控件。复制 `m95.css` 或 `m95.mjs` 时，一并复制 [assets/starter/LICENSE](assets/starter/LICENSE)，在项目及再分发副本中保留其中的版权声明和完整 MIT 许可文本。Starter 使用 `.m95` 限定作用域；青绿桌面需显式添加 `.m95-desktop`。开发者可用 `--m95-font` 覆盖字体。输入 `100` 时保持编辑原文，金额显示和计算由业务层负责。
 
 运行 `npm test` 检查分发资产；浏览器检查命令及覆盖范围见 [验证说明](docs/validation.md)。其他电脑和项目可按 [贡献规则](CONTRIBUTING.md) 提交脱敏经验，由维护端审查共享规范的更新。
+
+GitHub Actions 自动在 Node.js 22 和 24 上检查推送与 Pull Request；`main` 的更新通过后，自动发布现有案例到 Pages。共享设计变更和版本发布由维护端审核。[反馈表单](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/issues/new/choose) 接收问题与可复用经验，附件须先移除私有数据。
 
 本包不带历史实验室、私有反馈和旧 Git 历史。[来源说明](docs/source-and-license.md) 列出保留范围。项目代码与文档采用 **MIT**；Lucide 图标保留 ISC 和适用的 Feather MIT 声明。项目与微软无隶属关系。

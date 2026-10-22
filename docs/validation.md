@@ -1,6 +1,6 @@
 # Validation
 
-This distribution is a public preview. Tests use synthetic data and loopback-only reference servers. Node.js 22 or newer is required; no runtime npm packages are installed.
+This distribution is a public preview. Reference workflow tests use synthetic data and loopback-only servers. Node.js 22 or newer is required; no runtime npm packages are installed.
 
 ## Reproduce
 
@@ -40,12 +40,26 @@ The first Handover packaging run found a data-URL favicon blocked by the reused 
 
 Starter's 14 files, Handover CSS/model/icon adapter, numerical tokens and complete Lucide subset retain their source bytes. Packaging changes affect Handover's historical model import, navigation, favicon and local entrypoint. Tests close their own browser contexts and loopback servers; no user application instance is stopped.
 
+## GitHub publication checks
+
+The Pages packaging adds four tests to the original 53 checks: explicit file inventory and byte equality, nested HTML/module links under a project subpath, the root redirect to the existing gallery, and refusal to overwrite existing output or write into the checkout. The current local suite passes **57 tests** on Windows / Node.js 24.18.0.
+
+The GitHub workflow runs the suite on Ubuntu with Node.js 22 and 24, builds an allowlisted static artifact, and deploys it only after successful checks on `main`. Pull requests run tests and build without deployment permissions. See [Actions](https://github.com/ai-coding-lab-au/modern-95-ui-for-ai/actions) for each commit's actual results. Browser acceptance above is separate from CI unit coverage.
+
+To build the same artifact locally, choose a new directory whose parent already exists, outside this checkout:
+
+```sh
+npm run build:pages -- --out ../modern95-demo
+```
+
+The builder preserves example bytes and relative paths, includes MIT and third-party license files, and excludes launchers, test outputs, repository history and private data. It refuses an existing output directory rather than clearing it. Live demos use GitHub Pages hosting; the loopback server's HTTP security headers are not transferred to that host.
+
 ## Evidence boundaries
 
 - Unit counts, browser groups and assertions are reported separately. Historical test totals are not inherited by this curated package.
 - Browser geometry uses CSS pixels at device scale factor 1. It does not establish native Windows DPI, physical mouse/keyboard, screen-reader or OS caption-button behavior.
 - The examples use synthetic in-memory data or browser local storage. They do not validate a production database or backend.
-- A second-computer trial was waived by the maintainer; local archive acceptance is the release check. Other operating systems and Node.js 22 have not been tested.
+- A second-computer trial was waived by the maintainer; local archive acceptance is the release check. Browser acceptance covers Windows only; CI's Node.js matrix is unit/server/packaging coverage, not a cross-platform browser claim.
 - Actual Codex GUI / `skills/list` discovery was not run. Installation layout and metadata were checked without changing user configuration or an existing skill installation.
 - README Starter screenshots show the unchanged reference implementation. Handover screenshots are regenerated from this candidate. Both are synthetic browser captures.
 
